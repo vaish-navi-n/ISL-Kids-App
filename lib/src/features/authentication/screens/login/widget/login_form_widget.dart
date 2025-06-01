@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:isl_kids_app/src/features/authentication/repository/authentication_repository.dart';
 
-/// A StatefulWidget that provides a login form with email and password fields.
-/// It handles validation, Firebase authentication, loading state, and error feedback.
 class LoginFormWidget extends StatefulWidget {
   const LoginFormWidget({super.key});
 
@@ -12,93 +10,71 @@ class LoginFormWidget extends StatefulWidget {
 }
 
 class _LoginFormWidgetState extends State<LoginFormWidget> {
-  final _formKey =
-      GlobalKey<FormState>(); // Key to identify the form and manage validation
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
-  // Controllers to read and control the input from email and password TextFormFields
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
 
-  bool _isLoading = false; // Tracks whether the login process is in progress
-
-  /// This async function attempts to login the user using Firebase Authentication.
-  /// It first validates the form, then shows a loading indicator while authenticating.
-  /// On success, it navigates to the dashboard.
-  /// On failure, it shows an error snackbar with a specific message based on FirebaseAuthException.
-  Future<void> _loginUser() async {
+  void _login() async {
+    print("Login button pressed");
     if (_formKey.currentState!.validate()) {
-      // Validate user inputs
-      setState(() => _isLoading = true); // Show loading spinner
+      print("Form validated");
+      setState(() => _isLoading = true);
 
-      try {
-        // Sign in with email and password via Firebase
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text,
+      final error = await AuthenticationRepository.instance.loginWithEmailAndPassword(
+        _emailController.text.trim(), 
+        _passwordController.text.trim(),
         );
+        setState(() => _isLoading = false);
+        if (error == null) {
+          print("Login successful, navigating to dashboard");
+          Get.offAllNamed('/dashboard');
+        } else {
+          print("Login failed with error: $error"); 
+          Get.snackbar('Login Error', error, snackPosition: SnackPosition.BOTTOM);
+        } 
 
-        // Navigate to dashboard after successful login, replacing all previous routes
-        Get.offAllNamed('/dashboard');
-      } on FirebaseAuthException catch (e) {
-        // Custom error messages for common Firebase Auth failures
-        String message = 'Login failed';
-        if (e.code == 'user-not-found') {
-          message = 'No user found for that email';
-        } else if (e.code == 'wrong-password') {
-          message = 'Wrong password provided';
-        }
-
-        // Show error snackbar at the bottom with red background
-        Get.snackbar(
-          'Error',
-          message,
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red.shade200,
-        );
-      } finally {
-        setState(() => _isLoading = false); // Hide loading spinner
-      }
     }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey, // Attach the form key for validation
+      key: _formKey,
       child: Column(
         children: [
-          // Email input field with validation
           TextFormField(
             controller: _emailController,
             decoration: const InputDecoration(labelText: 'Email'),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter email';
-              }
-              return null; // Valid input
-            },
+            keyboardType: TextInputType.emailAddress,
+            validator: (value) => value == null || !value.contains('@') ? 'Enter a valid email' : null,
           ),
-          const SizedBox(height: 16), // Space between fields
-          // Password input field with obscured text and validation
           TextFormField(
             controller: _passwordController,
             decoration: const InputDecoration(labelText: 'Password'),
             obscureText: true,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter password';
-              }
-              return null; // Valid input
-            },
+            validator: (value) => value == null || value.length < 6 ? 'Password must be at least 6 characters' : null,
           ),
-          const SizedBox(height: 24), // Space before button
-          // Show a CircularProgressIndicator if loading, else show login button
+          const SizedBox(height: 24),
           _isLoading
               ? const CircularProgressIndicator()
               : ElevatedButton(
-                onPressed: _loginUser, // Trigger login on button press
-                child: const Text("LOGIN"),
-              ),
+                  onPressed: _login,
+                  child: const Text('LOGIN'),
+                ),
+          const SizedBox(height: 10),
+          TextButton(
+            onPressed: () => Get.toNamed('/signup'),
+            child: const Text('Don\'t have an account? SIGN UP'),
+          ),
         ],
       ),
     );

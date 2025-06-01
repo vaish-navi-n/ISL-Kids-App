@@ -4,6 +4,8 @@ import 'letter_list_screen.dart';
 class HomeScreen extends StatelessWidget {
   final List<String> categories = ['Alphabets', 'Numbers'];
 
+  HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

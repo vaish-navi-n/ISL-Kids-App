@@ -12,7 +12,20 @@
           "package_name": "com.example.isl_kids_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "232165675797-h0d2mqr6cu5hfbgkshi07qof26mn8ck3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.isl_kids_app",
+            "certificate_hash": "6b7bf92310db8e752269d625623e7c60f22e1ccd"
+          }
+        },
+        {
+          "client_id": "232165675797-56l8tffgrd76sqtgkb5rsau13jmibkup.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA8eb0S5N1Ozfc0cGz_DcS2izYoohmlEQk"
@@ -20,7 +33,91 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232165675797-56l8tffgrd76sqtgkb5rsau13jmibkup.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "232165675797-jjbgj4ifjmgfht8e81cpb3nl7qkdro2h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.islKidsQuiz"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232165675797:android:a31ba59ac7b8c307c10f1c",
+        "android_client_info": {
+          "package_name": "com.example.isl_kids_quiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232165675797-56l8tffgrd76sqtgkb5rsau13jmibkup.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8eb0S5N1Ozfc0cGz_DcS2izYoohmlEQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232165675797-56l8tffgrd76sqtgkb5rsau13jmibkup.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "232165675797-jjbgj4ifjmgfht8e81cpb3nl7qkdro2h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.islKidsQuiz"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232165675797:android:3ad92fe8328a6bf4c10f1c",
+        "android_client_info": {
+          "package_name": "isl.kid.s2025"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232165675797-56l8tffgrd76sqtgkb5rsau13jmibkup.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8eb0S5N1Ozfc0cGz_DcS2izYoohmlEQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232165675797-56l8tffgrd76sqtgkb5rsau13jmibkup.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "232165675797-jjbgj4ifjmgfht8e81cpb3nl7qkdro2h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.islKidsQuiz"
+              }
+            }
+          ]
         }
       }
     }

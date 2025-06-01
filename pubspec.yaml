@@ -16,9 +16,11 @@ dependencies:
   line_awesome_flutter: ^2.0.0
   firebase_core: ^2.17.0
   firebase_auth: ^4.16.0
+  google_sign_in: ^6.0.4
   cloud_firestore: ^4.15.0
   table_calendar: ^3.0.9
   intl: ^0.18.1
+  video_player: ^2.9.5
 
 dev_dependencies:
   flutter_test:
